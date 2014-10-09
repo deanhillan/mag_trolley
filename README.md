@@ -10,20 +10,20 @@ This script writes out the magnetic field data as a function of distance into a 
 ### Input for a non-background run
 The following files must exist and variables set:
 
-*Two unaltered (raw files include headers) '.Dat' files from each of the Bartington Spectramag inputs are required.
-*`filename_mag=` - Input 1.
-*`filename_dist=` - Input 2.
-*`output_file=` - Output file.
+* Two unaltered (raw files include headers) '.Dat' files from each of the Bartington Spectramag inputs are required.
+* `filename_mag=` - Input 1.
+* `filename_dist=` - Input 2.
+* `output_file=` - Output file.
 
 Note that input file names may be absolute paths rather than relative, e.g., `H:\Lindfield 2014_09_30\data1.Dat`
 
 ### Input for a background run
 Everything as per above is required but additionally:
 
-*Two '.Dat' files which specify a background trolley run.
-*`background_exist=1`
-*`filename_mag_back=` - Background Input 1.
-*`filename_dist_back=` - Background Input 2.
+* Two '.Dat' files which specify a background trolley run.
+* `background_exist=1`
+* `filename_mag_back=` - Background Input 1.
+* `filename_dist_back=` - Background Input 2.
 
 ### Output for a non-background run
 The output file writes 4 columns, the distance in arbitrary units, and the X, Y, and Z magnetic components in nT (`dist xnT ynT znT`).
