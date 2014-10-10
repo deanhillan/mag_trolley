@@ -9,6 +9,12 @@ The script `process_single_file.m` works in almost an identical way to the above
 
 These scripts write out the magnetic field data as a function of distance into a single specified output file. There is also an option to include a set of 'background' measurements which are subtracted off the recorded magnetic field. This last mode of operation requires some interpolation between the two runs, and as such it is suggested that the trolley be run over the same distance for each set of measurements, and only be run in one direction per run.
 
+### Example data provided
+
+`back1.Dat` and `back2.Dat` - Background data to be used in `combined_data.m`
+`data1.Dat` and `data2.Dat` - Data to be used in `combined_data.m`
+`data_single.Dat` - Data to be used in `process_single_file.m`
+
 ### Input for a non-background run
 The following files must exist and variables set:
 `combined_data.m` - 
@@ -44,3 +50,5 @@ The 3 magnetic components are also plotted as a function of distance.
 ### Output for a background run
 The output file writes 9 columns, the distance in arbitrary units, and the X, Y, and Z magnetic components with the background subtracted, the X, Y, and Z magnetic components, and the X, Y, and Z background components (`dist xnT_m_back ynT_m_back znT_m_back xnT ynT znT xnT_back ynT_back znT_back`).
 The 3 components of the signal with the background subtracted and the background itself are also plotted as a function of distance.
+
+
