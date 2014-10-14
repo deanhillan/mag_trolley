@@ -22,11 +22,13 @@ The following files must exist and variables set:
 * `filename_mag=` - Input 1.
 * `filename_dist=` - Input 2.
 * `output_file=` - Output file.
+* `track_dist=` - Distance of track in metres.
 
 `process_single_file.m` - 
 * One unaltered (raw file includes headers) '.Dat' files from the Bartington Spectramag input is required.
 * `filename_mag=` - Input 1.
 * `output_file=` - Output file.
+* `track_dist=` - Distance of track in metres.
 
 Note that input file names may be absolute paths rather than relative, e.g., `H:\Lindfield 2014_09_30\data1.Dat`
 

@@ -11,6 +11,8 @@ filename_mag = 'data_single.Dat';
 % Input 2: Distance channel
 % Output file to write to
 output_file = 'combined_data.dat';
+% Track distance (m)
+track_dist = 3.5;
 
 % Background signal information
 % Does background data exist (1=Yes, 0=No)
@@ -54,12 +56,13 @@ xnT = dataArray_mag{:, 2};
 ynT = dataArray_mag{:, 3};
 znT = dataArray_mag{:, 4};
 dist = dataArray_mag{:, 12};
+dist_conv = -(-dist(1)+dist).*track_dist/(max(dist)-min(dist));
 
 max_dist_diff = max(dist - [dist(2:size(dist,1)); dist(size(dist,1))]);
 
 if (background_exist==0)
     fileID_write = fopen(output_file,'w+');
-    dlmwrite(output_file,[dist xnT ynT znT],'delimiter','\t','precision',4)
+    dlmwrite(output_file,[dist dist_conv xnT ynT znT],'delimiter','\t','precision',4)
     fclose(fileID_write);
 else
     Times_back = dataArray_mag_back{:, 1};
@@ -95,37 +98,36 @@ else
     end
 
     fileID_write = fopen(output_file,'w+');
-    dlmwrite(output_file,[dist xnT_m_back ynT_m_back znT_m_back xnT ...
-        ynT znT xnT_back ynT_back znT_back],'delimiter','\t','precision',4)
+    dlmwrite(output_file,[dist dist_conv xnT_m_back ynT_m_back ... 
+        znT_m_back xnT ynT znT xnT_back ynT_back ... 
+        znT_back],'delimiter','\t','precision',4)
     fclose(fileID_write);
 end
 
 %% Plotting
 figure
 if (background_exist == 0)
-    plot(dist,xnT,'r', 'LineWidth',1.5)
+    plot(dist_conv,xnT,'r', 'LineWidth',1.5)
     hold on
-    plot(dist,ynT,'LineWidth',1.5)
-    plot(dist,znT,'g','LineWidth',1.5)
+    plot(dist_conv,ynT,'LineWidth',1.5)
+    plot(dist_conv,znT,'g','LineWidth',1.5)
     legend('X', 'Y', 'Z')
     ylabel('nT')
-    xlabel('Distance (arb.)')
-    set(gca,'XDir','Reverse')
+    xlabel('Distance (m)')
     hold off
 else
-    plot(dist,xnT_m_back,'r', 'LineWidth',1.5)
+    plot(dist_conv,xnT_m_back,'r', 'LineWidth',1.5)
     hold on
-    plot(dist,ynT_m_back,'LineWidth',1.5)
-    plot(dist,znT_m_back,'g','LineWidth',1.5)
+    plot(dist_conv,ynT_m_back,'LineWidth',1.5)
+    plot(dist_conv,znT_m_back,'g','LineWidth',1.5)
     axis tight
-    plot(dist,xnT_back, 'r--','LineWidth',0.5)
-    plot(dist,ynT_back,'b--','LineWidth',0.5)
-    plot(dist,znT_back, 'g--','LineWidth',0.5)
+    plot(dist_conv,xnT_back, 'r--','LineWidth',0.5)
+    plot(dist_conv,ynT_back,'b--','LineWidth',0.5)
+    plot(dist_conv,znT_back, 'g--','LineWidth',0.5)
     legend('X-X_b_a_c_k', 'Y-Y_b_a_c_k', 'Z-Z_b_a_c_k', ...
         'X_b_a_c_k', 'Y_b_a_c_k', 'Z_b_a_c_k')
     ylabel('nT')
-    xlabel('Distance (arb.)')
-    set(gca,'XDir','Reverse')
+    xlabel('Distance (m)')
     hold off
 end
 
